@@ -13,7 +13,7 @@ tasks:
       - docx
     desc: "Generate swagger docx"
     cmds:
-      - swag init --dir ./cmd,./internal/net/handlers,./internal/views --output ./cmd/docs
+      - swag init --dir ./cmd,./internal/net/handlers,./internal/views --output ./docs
 
   build:
     aliases:

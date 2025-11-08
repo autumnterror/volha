@@ -1,0 +1,38 @@
+version: 3
+
+tasks:
+  up:
+    aliases:
+      - up
+    cmds:
+      - go run ./cmd/migrator
+  down:
+    aliases:
+      - down
+    cmds:
+      - go run ./cmd/migrator --type down
+  run:
+    aliases:
+      - run
+    desc: "Run application"
+    cmds:
+      - go run ./cmd/app
+
+  build:
+    aliases:
+      - build
+    desc: "Build docker image"
+    cmds:
+      - docker build -t zitrax78/product-service .
+
+  update:
+    aliases:
+      - update
+    cmds:
+      - go get github.com/autumnterror/volha-proto@v0.1.6
+  test:
+    aliases:
+      - test
+    cmds:
+      - go clean -testcache
+      - go test ./internal/pkg/psql -v

@@ -1,0 +1,28 @@
+version: 3
+
+tasks:
+  run:
+    aliases:
+      - run
+    desc: "Run application"
+    cmds:
+      - go run ./cmd
+
+  docx:
+    aliases:
+      - docx
+    desc: "Generate swagger docx"
+    cmds:
+      - swag init --dir ./cmd,./internal/net/handlers,./internal/views --output ./cmd/docs
+
+  build:
+    aliases:
+      - build
+    desc: "Build docker image"
+    cmds:
+      - docker build -t zitrax78/volha-gateway .
+  update:
+    aliases:
+      - update
+    cmds:
+      - go get github.com/autumnterror/volha-proto@v0.1.6

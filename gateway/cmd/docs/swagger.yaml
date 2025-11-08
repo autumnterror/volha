@@ -1,0 +1,1440 @@
+basePath: /
+definitions:
+  views.Brand:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  views.Category:
+    properties:
+      id:
+        type: string
+      img:
+        type: string
+      title:
+        type: string
+      uri:
+        type: string
+    type: object
+  views.Color:
+    properties:
+      hex:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  views.Country:
+    properties:
+      friendly:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  views.Dictionaries:
+    properties:
+      brands:
+        items:
+          $ref: '#/definitions/views.Brand'
+        type: array
+      categories:
+        items:
+          $ref: '#/definitions/views.Category'
+        type: array
+      colors:
+        items:
+          $ref: '#/definitions/views.Color'
+        type: array
+      countries:
+        items:
+          $ref: '#/definitions/views.Country'
+        type: array
+      materials:
+        items:
+          $ref: '#/definitions/views.Material'
+        type: array
+      max_depth:
+        type: integer
+      max_height:
+        type: integer
+      max_price:
+        type: integer
+      max_width:
+        type: integer
+      min_depth:
+        type: integer
+      min_height:
+        type: integer
+      min_price:
+        type: integer
+      min_width:
+        type: integer
+    type: object
+  views.Material:
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+  views.Product:
+    properties:
+      article:
+        type: string
+      brand:
+        $ref: '#/definitions/views.Brand'
+      category:
+        $ref: '#/definitions/views.Category'
+      colors:
+        items:
+          $ref: '#/definitions/views.Color'
+        type: array
+      country:
+        $ref: '#/definitions/views.Country'
+      depth:
+        type: integer
+      description:
+        type: string
+      height:
+        type: integer
+      id:
+        type: string
+      materials:
+        items:
+          $ref: '#/definitions/views.Material'
+        type: array
+      photos:
+        items:
+          type: string
+        type: array
+      price:
+        type: integer
+      seems:
+        items:
+          $ref: '#/definitions/views.Product'
+        type: array
+      title:
+        type: string
+      width:
+        type: integer
+    type: object
+  views.ProductColorPhotos:
+    properties:
+      color_id:
+        type: string
+      photos:
+        items:
+          type: string
+        type: array
+      product_id:
+        type: string
+    type: object
+  views.ProductColorPhotosId:
+    properties:
+      color_id:
+        type: string
+      product_id:
+        type: string
+    type: object
+  views.ProductFilter:
+    properties:
+      brand:
+        items:
+          type: string
+        type: array
+      category:
+        items:
+          type: string
+        type: array
+      colors:
+        items:
+          type: string
+        type: array
+      country:
+        items:
+          type: string
+        type: array
+      limit:
+        type: integer
+      materials:
+        items:
+          type: string
+        type: array
+      max_depth:
+        type: integer
+      max_height:
+        type: integer
+      max_price:
+        type: integer
+      max_width:
+        type: integer
+      min_depth:
+        type: integer
+      min_height:
+        type: integer
+      min_price:
+        type: integer
+      min_width:
+        type: integer
+      offset:
+        type: integer
+      sort_by:
+        type: string
+      sort_order:
+        type: string
+    type: object
+  views.ProductId:
+    properties:
+      article:
+        type: string
+      brand:
+        type: string
+      category:
+        type: string
+      colors:
+        items:
+          type: string
+        type: array
+      country:
+        type: string
+      depth:
+        type: integer
+      description:
+        type: string
+      height:
+        type: integer
+      id:
+        type: string
+      materials:
+        items:
+          type: string
+        type: array
+      photos:
+        items:
+          type: string
+        type: array
+      price:
+        type: integer
+      seems:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+      width:
+        type: integer
+    type: object
+  views.SWGBrandListResponse:
+    properties:
+      brands:
+        items:
+          $ref: '#/definitions/views.Brand'
+        type: array
+    type: object
+  views.SWGCategoryListResponse:
+    properties:
+      categories:
+        items:
+          $ref: '#/definitions/views.Category'
+        type: array
+    type: object
+  views.SWGColorListResponse:
+    properties:
+      colors:
+        items:
+          $ref: '#/definitions/views.Color'
+        type: array
+    type: object
+  views.SWGCountryListResponse:
+    properties:
+      countries:
+        items:
+          $ref: '#/definitions/views.Country'
+        type: array
+    type: object
+  views.SWGErrorResponse:
+    properties:
+      error:
+        example: something went wrong
+        type: string
+    type: object
+  views.SWGFileUploadResponse:
+    properties:
+      mime:
+        type: string
+      name:
+        type: string
+    type: object
+  views.SWGIdResponse:
+    properties:
+      id:
+        example: dfhsa12341324
+        type: string
+    type: object
+  views.SWGMaterialListResponse:
+    properties:
+      materials:
+        items:
+          $ref: '#/definitions/views.Material'
+        type: array
+    type: object
+  views.SWGProductColorPhotosListResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/views.ProductColorPhotos'
+        type: array
+    type: object
+  views.SWGProductListResponse:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/views.Product'
+        type: array
+    type: object
+  views.SWGSuccessResponse:
+    properties:
+      answer:
+        example: operation successful
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: help@breezy.su
+    name: Alex "bustard" Provor
+    url: https://breezy.su
+  title: Volha gateway REST API
+  version: "0.1"
+paths:
+  /api/auth/check:
+    get:
+      description: проверяет пароль из cookie
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Проверить пароль
+      tags:
+      - auth
+  /api/brand/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новый бренд
+      parameters:
+      - description: Данные нового бренда
+        in: body
+        name: brand
+        required: true
+        schema:
+          $ref: '#/definitions/views.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать новый бренд
+      tags:
+      - brands
+  /api/brand/delete:
+    delete:
+      description: Удаляет бренд по ID
+      parameters:
+      - description: ID бренда
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить бренд
+      tags:
+      - brands
+  /api/brand/getall:
+    get:
+      description: Возвращает список всех брендов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.SWGBrandListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все бренды
+      tags:
+      - brands
+  /api/brand/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет информацию о бренде по ID
+      parameters:
+      - description: ID бренда
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Данные бренда
+        in: body
+        name: brand
+        required: true
+        schema:
+          $ref: '#/definitions/views.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить бренд
+      tags:
+      - brands
+  /api/category/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новую категорию
+      parameters:
+      - description: Новая категория
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/views.Category'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Категория успешно создана
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать категорию
+      tags:
+      - category
+  /api/category/delete:
+    delete:
+      description: Удаляет категорию по ID
+      parameters:
+      - description: ID категории
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Категория успешно удалена
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить категорию
+      tags:
+      - category
+  /api/category/getall:
+    get:
+      description: Возвращает список всех категорий
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGCategoryListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все категории
+      tags:
+      - category
+  /api/category/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет информацию о категории
+      parameters:
+      - description: ID категории
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Обновлённая категория
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/views.Category'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Категория успешно обновлена
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID или формат
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить категорию
+      tags:
+      - category
+  /api/color/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новый цвет
+      parameters:
+      - description: Новый цвет
+        in: body
+        name: color
+        required: true
+        schema:
+          $ref: '#/definitions/views.Color'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Цвет успешно создан
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать цвет
+      tags:
+      - color
+  /api/color/delete:
+    delete:
+      description: Удаляет цвет по ID
+      parameters:
+      - description: ID цвета
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Цвет успешно удалён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить цвет
+      tags:
+      - color
+  /api/color/getall:
+    get:
+      description: Возвращает список всех доступных цветов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGColorListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все цвета
+      tags:
+      - color
+  /api/color/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные существующего цвета
+      parameters:
+      - description: ID цвета
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Обновлённый цвет
+        in: body
+        name: color
+        required: true
+        schema:
+          $ref: '#/definitions/views.Color'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Цвет успешно обновлён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID или данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить цвет
+      tags:
+      - color
+  /api/country/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новую страну
+      parameters:
+      - description: Новая страна
+        in: body
+        name: country
+        required: true
+        schema:
+          $ref: '#/definitions/views.Country'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Страна успешно создана
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать страну
+      tags:
+      - country
+  /api/country/delete:
+    delete:
+      description: Удаляет страну по ID
+      parameters:
+      - description: ID страны
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Страна успешно удалена
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить страну
+      tags:
+      - country
+  /api/country/getall:
+    get:
+      description: Возвращает список всех стран
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGCountryListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все страны
+      tags:
+      - country
+  /api/country/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные существующей страны
+      parameters:
+      - description: ID страны
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Обновлённые данные страны
+        in: body
+        name: country
+        required: true
+        schema:
+          $ref: '#/definitions/views.Country'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Страна успешно обновлена
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID или данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить страну
+      tags:
+      - country
+  /api/dictionaries/getall:
+    get:
+      description: 'Возвращает список всех доступных справочных данных: бренды, категории,
+        материалы, страны и цвета'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.Dictionaries'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все справочники
+      tags:
+      - dictionaries
+  /api/dictionaries/getall/category:
+    get:
+      description: 'Возвращает список всех доступных справочных данных: бренды, материалы,
+        страны и цвета и размеры по определенной категории'
+      parameters:
+      - description: ID категории
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.Dictionaries'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все справочники по категории
+      tags:
+      - dictionaries
+  /api/files/delete:
+    delete:
+      description: 'Удаляет файл. Требуется передовать только имя. Пример: example.gif'
+      parameters:
+      - description: название файла
+        in: query
+        name: title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: файл успешно удалён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверное название
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить файл
+      tags:
+      - files
+  /api/files/upload:
+    post:
+      consumes:
+      - application/json
+      description: Сохраняет изображение в папке сервера images/. В поле "img" передается
+        файл с расширениями jpg, png, webp, gif
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Цвет успешно создан
+          schema:
+            $ref: '#/definitions/views.SWGFileUploadResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Загрузить изображение
+      tags:
+      - files
+  /api/material/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новый материал
+      parameters:
+      - description: Новый материал
+        in: body
+        name: material
+        required: true
+        schema:
+          $ref: '#/definitions/views.Material'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Материал успешно создан
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать материал
+      tags:
+      - material
+  /api/material/delete:
+    delete:
+      description: Удаляет материал по ID
+      parameters:
+      - description: ID материала
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Материал успешно удалён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить материал
+      tags:
+      - material
+  /api/material/getall:
+    get:
+      description: Возвращает список всех материалов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGMaterialListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все материалы
+      tags:
+      - material
+  /api/material/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные существующего материала
+      parameters:
+      - description: ID материала
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Обновлённые данные материала
+        in: body
+        name: material
+        required: true
+        schema:
+          $ref: '#/definitions/views.Material'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Материал успешно обновлён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID или данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить материал
+      tags:
+      - material
+  /api/product/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет новый продукт
+      parameters:
+      - description: Новый продукт
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Продукт успешно создан
+          schema:
+            $ref: '#/definitions/views.SWGIdResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать продукт
+      tags:
+      - product
+  /api/product/delete:
+    delete:
+      description: Удаляет продукт по ID
+      parameters:
+      - description: ID продукта
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Продукт успешно удалён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить продукт
+      tags:
+      - product
+  /api/product/filter:
+    post:
+      consumes:
+      - application/json
+      description: Возвращает список продуктов, соответствующих заданным критериям
+        фильтрации
+      parameters:
+      - description: Параметры фильтрации
+        in: body
+        name: filter
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductFilter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGProductListResponse'
+        "400":
+          description: Неверный формат запроса
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить продукты по фильтру
+      tags:
+      - product
+  /api/product/get:
+    get:
+      description: Возвращает продукт
+      parameters:
+      - description: ID продукта
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.Product'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить продукт по id
+      tags:
+      - product
+  /api/product/getall:
+    get:
+      description: Возвращает список всех продуктов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGProductListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все продукты
+      tags:
+      - product
+  /api/product/search:
+    get:
+      description: Ищет продукт по ID (UUID), article (8 цифр) или названию (частичное
+        совпадение)
+      parameters:
+      - description: Поисковый запрос
+        in: query
+        name: query
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/views.Product'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Поиск продуктов
+      tags:
+      - product
+  /api/product/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет данные существующего продукта
+      parameters:
+      - description: ID продукта
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Обновлённые данные продукта
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Продукт успешно обновлён
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный ID или данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить продукт
+      tags:
+      - product
+  /api/productcolorphotos/create:
+    post:
+      consumes:
+      - application/json
+      description: Добавляет массив фотографий для конкретного продукта и цвета
+      parameters:
+      - description: Новый набор фотографий
+        in: body
+        name: photos
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductColorPhotos'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Фотографии успешно добавлены
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверный формат данных
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Создать фотографии продукта для цвета
+      tags:
+      - product_color_photos
+  /api/productcolorphotos/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Удаляет записи фотографий продукта для указанного цвета
+      parameters:
+      - description: ID продукта и цвета
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductColorPhotosId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Фотографии успешно удалены
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверные данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Удалить фотографии продукта для цвета
+      tags:
+      - product_color_photos
+  /api/productcolorphotos/getall:
+    get:
+      description: Возвращает все записи product_color_photos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный запрос
+          schema:
+            $ref: '#/definitions/views.SWGProductColorPhotosListResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить все фотографии продуктов по цветам
+      tags:
+      - product_color_photos
+  /api/productcolorphotos/getphotos:
+    post:
+      consumes:
+      - application/json
+      description: Возвращает массив фотографий для указанного продукта и цвета
+      parameters:
+      - description: ID продукта и цвета
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductColorPhotosId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Список фотографий
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Неверные данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Получить фотографии продукта по ID продукта и цвета
+      tags:
+      - product_color_photos
+  /api/productcolorphotos/update:
+    put:
+      consumes:
+      - application/json
+      description: Обновляет массив фотографий для конкретного продукта и цвета
+      parameters:
+      - description: Обновлённые фотографии
+        in: body
+        name: photos
+        required: true
+        schema:
+          $ref: '#/definitions/views.ProductColorPhotos'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Фотографии успешно обновлены
+          schema:
+            $ref: '#/definitions/views.SWGSuccessResponse'
+        "400":
+          description: Неверные данные
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "500":
+          description: Ошибка на сервере
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+        "502":
+          description: Ошибка взаимодействия с сервисом
+          schema:
+            $ref: '#/definitions/views.SWGErrorResponse'
+      summary: Обновить фотографии продукта для цвета
+      tags:
+      - product_color_photos
+schemes:
+- http
+swagger: "2.0"

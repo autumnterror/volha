@@ -1,0 +1,11 @@
+.env
+*.cmd
+*.sql
+*.zip
+testhtml/
+configs/*.yaml
+volha-proto/
+.DS_Store
+local.yaml
+test.go
+.DS_Store

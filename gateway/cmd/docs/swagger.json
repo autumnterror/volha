@@ -1,0 +1,2186 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "Volha gateway REST API",
+        "contact": {
+            "name": "Alex \"bustard\" Provor",
+            "url": "https://breezy.su",
+            "email": "help@breezy.su"
+        },
+        "version": "0.1"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/auth/check": {
+            "get": {
+                "description": "проверяет пароль из cookie",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Проверить пароль",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brand/create": {
+            "post": {
+                "description": "Добавляет новый бренд",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "Создать новый бренд",
+                "parameters": [
+                    {
+                        "description": "Данные нового бренда",
+                        "name": "brand",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Brand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brand/delete": {
+            "delete": {
+                "description": "Удаляет бренд по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "Удалить бренд",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID бренда",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brand/getall": {
+            "get": {
+                "description": "Возвращает список всех брендов",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "Получить все бренды",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGBrandListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/brand/update": {
+            "put": {
+                "description": "Обновляет информацию о бренде по ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "brands"
+                ],
+                "summary": "Обновить бренд",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID бренда",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Данные бренда",
+                        "name": "brand",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Brand"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/create": {
+            "post": {
+                "description": "Добавляет новую категорию",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Создать категорию",
+                "parameters": [
+                    {
+                        "description": "Новая категория",
+                        "name": "category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Категория успешно создана",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/delete": {
+            "delete": {
+                "description": "Удаляет категорию по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Удалить категорию",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID категории",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Категория успешно удалена",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/getall": {
+            "get": {
+                "description": "Возвращает список всех категорий",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Получить все категории",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGCategoryListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/category/update": {
+            "put": {
+                "description": "Обновляет информацию о категории",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "category"
+                ],
+                "summary": "Обновить категорию",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID категории",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Обновлённая категория",
+                        "name": "category",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Категория успешно обновлена",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID или формат",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/color/create": {
+            "post": {
+                "description": "Добавляет новый цвет",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "color"
+                ],
+                "summary": "Создать цвет",
+                "parameters": [
+                    {
+                        "description": "Новый цвет",
+                        "name": "color",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Color"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Цвет успешно создан",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/color/delete": {
+            "delete": {
+                "description": "Удаляет цвет по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "color"
+                ],
+                "summary": "Удалить цвет",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID цвета",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Цвет успешно удалён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/color/getall": {
+            "get": {
+                "description": "Возвращает список всех доступных цветов",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "color"
+                ],
+                "summary": "Получить все цвета",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGColorListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/color/update": {
+            "put": {
+                "description": "Обновляет данные существующего цвета",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "color"
+                ],
+                "summary": "Обновить цвет",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID цвета",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Обновлённый цвет",
+                        "name": "color",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Color"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Цвет успешно обновлён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID или данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/create": {
+            "post": {
+                "description": "Добавляет новую страну",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "country"
+                ],
+                "summary": "Создать страну",
+                "parameters": [
+                    {
+                        "description": "Новая страна",
+                        "name": "country",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Country"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Страна успешно создана",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/delete": {
+            "delete": {
+                "description": "Удаляет страну по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "country"
+                ],
+                "summary": "Удалить страну",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID страны",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Страна успешно удалена",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/getall": {
+            "get": {
+                "description": "Возвращает список всех стран",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "country"
+                ],
+                "summary": "Получить все страны",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGCountryListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/country/update": {
+            "put": {
+                "description": "Обновляет данные существующей страны",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "country"
+                ],
+                "summary": "Обновить страну",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID страны",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Обновлённые данные страны",
+                        "name": "country",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Country"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Страна успешно обновлена",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID или данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dictionaries/getall": {
+            "get": {
+                "description": "Возвращает список всех доступных справочных данных: бренды, категории, материалы, страны и цвета",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dictionaries"
+                ],
+                "summary": "Получить все справочники",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.Dictionaries"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dictionaries/getall/category": {
+            "get": {
+                "description": "Возвращает список всех доступных справочных данных: бренды, материалы, страны и цвета и размеры по определенной категории",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "dictionaries"
+                ],
+                "summary": "Получить все справочники по категории",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID категории",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.Dictionaries"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/files/delete": {
+            "delete": {
+                "description": "Удаляет файл. Требуется передовать только имя. Пример: example.gif",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "files"
+                ],
+                "summary": "Удалить файл",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "название файла",
+                        "name": "title",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "файл успешно удалён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверное название",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/files/upload": {
+            "post": {
+                "description": "Сохраняет изображение в папке сервера images/. В поле \"img\" передается файл с расширениями jpg, png, webp, gif",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "files"
+                ],
+                "summary": "Загрузить изображение",
+                "responses": {
+                    "200": {
+                        "description": "Цвет успешно создан",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGFileUploadResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/material/create": {
+            "post": {
+                "description": "Добавляет новый материал",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "material"
+                ],
+                "summary": "Создать материал",
+                "parameters": [
+                    {
+                        "description": "Новый материал",
+                        "name": "material",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Material"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Материал успешно создан",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/material/delete": {
+            "delete": {
+                "description": "Удаляет материал по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "material"
+                ],
+                "summary": "Удалить материал",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID материала",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Материал успешно удалён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/material/getall": {
+            "get": {
+                "description": "Возвращает список всех материалов",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "material"
+                ],
+                "summary": "Получить все материалы",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGMaterialListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/material/update": {
+            "put": {
+                "description": "Обновляет данные существующего материала",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "material"
+                ],
+                "summary": "Обновить материал",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID материала",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Обновлённые данные материала",
+                        "name": "material",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.Material"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Материал успешно обновлён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID или данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/create": {
+            "post": {
+                "description": "Добавляет новый продукт",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Создать продукт",
+                "parameters": [
+                    {
+                        "description": "Новый продукт",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Продукт успешно создан",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/delete": {
+            "delete": {
+                "description": "Удаляет продукт по ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Удалить продукт",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID продукта",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Продукт успешно удалён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/filter": {
+            "post": {
+                "description": "Возвращает список продуктов, соответствующих заданным критериям фильтрации",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Получить продукты по фильтру",
+                "parameters": [
+                    {
+                        "description": "Параметры фильтрации",
+                        "name": "filter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductFilter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGProductListResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат запроса",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/get": {
+            "get": {
+                "description": "Возвращает продукт",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Получить продукт по id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID продукта",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.Product"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/getall": {
+            "get": {
+                "description": "Возвращает список всех продуктов",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Получить все продукты",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGProductListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/search": {
+            "get": {
+                "description": "Ищет продукт по ID (UUID), article (8 цифр) или названию (частичное совпадение)",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Поиск продуктов",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Поисковый запрос",
+                        "name": "query",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/views.Product"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Bad Gateway",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/update": {
+            "put": {
+                "description": "Обновляет данные существующего продукта",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "Обновить продукт",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID продукта",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Обновлённые данные продукта",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Продукт успешно обновлён",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный ID или данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/productcolorphotos/create": {
+            "post": {
+                "description": "Добавляет массив фотографий для конкретного продукта и цвета",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product_color_photos"
+                ],
+                "summary": "Создать фотографии продукта для цвета",
+                "parameters": [
+                    {
+                        "description": "Новый набор фотографий",
+                        "name": "photos",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductColorPhotos"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Фотографии успешно добавлены",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный формат данных",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/productcolorphotos/delete": {
+            "delete": {
+                "description": "Удаляет записи фотографий продукта для указанного цвета",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product_color_photos"
+                ],
+                "summary": "Удалить фотографии продукта для цвета",
+                "parameters": [
+                    {
+                        "description": "ID продукта и цвета",
+                        "name": "id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductColorPhotosId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Фотографии успешно удалены",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверные данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/productcolorphotos/getall": {
+            "get": {
+                "description": "Возвращает все записи product_color_photos",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product_color_photos"
+                ],
+                "summary": "Получить все фотографии продуктов по цветам",
+                "responses": {
+                    "200": {
+                        "description": "Успешный запрос",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGProductColorPhotosListResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/productcolorphotos/getphotos": {
+            "post": {
+                "description": "Возвращает массив фотографий для указанного продукта и цвета",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product_color_photos"
+                ],
+                "summary": "Получить фотографии продукта по ID продукта и цвета",
+                "parameters": [
+                    {
+                        "description": "ID продукта и цвета",
+                        "name": "id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductColorPhotosId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список фотографий",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Неверные данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/productcolorphotos/update": {
+            "put": {
+                "description": "Обновляет массив фотографий для конкретного продукта и цвета",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product_color_photos"
+                ],
+                "summary": "Обновить фотографии продукта для цвета",
+                "parameters": [
+                    {
+                        "description": "Обновлённые фотографии",
+                        "name": "photos",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/views.ProductColorPhotos"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Фотографии успешно обновлены",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверные данные",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка на сервере",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    },
+                    "502": {
+                        "description": "Ошибка взаимодействия с сервисом",
+                        "schema": {
+                            "$ref": "#/definitions/views.SWGErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "views.Brand": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "img": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "uri": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.Color": {
+            "type": "object",
+            "properties": {
+                "hex": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.Country": {
+            "type": "object",
+            "properties": {
+                "friendly": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.Dictionaries": {
+            "type": "object",
+            "properties": {
+                "brands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Brand"
+                    }
+                },
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Category"
+                    }
+                },
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Color"
+                    }
+                },
+                "countries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Country"
+                    }
+                },
+                "materials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Material"
+                    }
+                },
+                "max_depth": {
+                    "type": "integer"
+                },
+                "max_height": {
+                    "type": "integer"
+                },
+                "max_price": {
+                    "type": "integer"
+                },
+                "max_width": {
+                    "type": "integer"
+                },
+                "min_depth": {
+                    "type": "integer"
+                },
+                "min_height": {
+                    "type": "integer"
+                },
+                "min_price": {
+                    "type": "integer"
+                },
+                "min_width": {
+                    "type": "integer"
+                }
+            }
+        },
+        "views.Material": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.Product": {
+            "type": "object",
+            "properties": {
+                "article": {
+                    "type": "string"
+                },
+                "brand": {
+                    "$ref": "#/definitions/views.Brand"
+                },
+                "category": {
+                    "$ref": "#/definitions/views.Category"
+                },
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Color"
+                    }
+                },
+                "country": {
+                    "$ref": "#/definitions/views.Country"
+                },
+                "depth": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "materials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Material"
+                    }
+                },
+                "photos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "seems": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Product"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                }
+            }
+        },
+        "views.ProductColorPhotos": {
+            "type": "object",
+            "properties": {
+                "color_id": {
+                    "type": "string"
+                },
+                "photos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "product_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.ProductColorPhotosId": {
+            "type": "object",
+            "properties": {
+                "color_id": {
+                    "type": "string"
+                },
+                "product_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.ProductFilter": {
+            "type": "object",
+            "properties": {
+                "brand": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "category": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "country": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "materials": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "max_depth": {
+                    "type": "integer"
+                },
+                "max_height": {
+                    "type": "integer"
+                },
+                "max_price": {
+                    "type": "integer"
+                },
+                "max_width": {
+                    "type": "integer"
+                },
+                "min_depth": {
+                    "type": "integer"
+                },
+                "min_height": {
+                    "type": "integer"
+                },
+                "min_price": {
+                    "type": "integer"
+                },
+                "min_width": {
+                    "type": "integer"
+                },
+                "offset": {
+                    "type": "integer"
+                },
+                "sort_by": {
+                    "type": "string"
+                },
+                "sort_order": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.ProductId": {
+            "type": "object",
+            "properties": {
+                "article": {
+                    "type": "string"
+                },
+                "brand": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "country": {
+                    "type": "string"
+                },
+                "depth": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "materials": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "photos": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "seems": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "integer"
+                }
+            }
+        },
+        "views.SWGBrandListResponse": {
+            "type": "object",
+            "properties": {
+                "brands": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Brand"
+                    }
+                }
+            }
+        },
+        "views.SWGCategoryListResponse": {
+            "type": "object",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Category"
+                    }
+                }
+            }
+        },
+        "views.SWGColorListResponse": {
+            "type": "object",
+            "properties": {
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Color"
+                    }
+                }
+            }
+        },
+        "views.SWGCountryListResponse": {
+            "type": "object",
+            "properties": {
+                "countries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Country"
+                    }
+                }
+            }
+        },
+        "views.SWGErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "something went wrong"
+                }
+            }
+        },
+        "views.SWGFileUploadResponse": {
+            "type": "object",
+            "properties": {
+                "mime": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "views.SWGIdResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "dfhsa12341324"
+                }
+            }
+        },
+        "views.SWGMaterialListResponse": {
+            "type": "object",
+            "properties": {
+                "materials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Material"
+                    }
+                }
+            }
+        },
+        "views.SWGProductColorPhotosListResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.ProductColorPhotos"
+                    }
+                }
+            }
+        },
+        "views.SWGProductListResponse": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/views.Product"
+                    }
+                }
+            }
+        },
+        "views.SWGSuccessResponse": {
+            "type": "object",
+            "properties": {
+                "answer": {
+                    "type": "string",
+                    "example": "operation successful"
+                }
+            }
+        }
+    }
+}

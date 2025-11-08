@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "gateway/cmd/docs"
 	"gateway/config"
 	"gateway/copyrights"
+	_ "gateway/docs"
 	"gateway/internal/grpc/products"
 	"gateway/internal/net/echo"
 	"gateway/internal/pkg/redis"

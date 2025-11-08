@@ -6,6 +6,7 @@ import (
 	"gateway/config"
 	"gateway/internal/grpc/products"
 	"gateway/internal/net/handlers"
+	"gateway/internal/net/mw"
 	"gateway/internal/pkg/redis"
 	"gateway/internal/utils/format"
 	"net/http"
@@ -36,7 +37,7 @@ func New(rds *redis.Client, a *products.Client, cfg *config.Config) *Echo {
 	e.Use(middleware.CORS())
 	e.Static("/images", ImagesDir)
 
-	userApi := e.Group("/api")
+	userApi := e.Group("/api", mw.CheckId())
 	{
 		p := userApi.Group("/product")
 		{
@@ -89,7 +90,7 @@ func New(rds *redis.Client, a *products.Client, cfg *config.Config) *Echo {
 		}
 	}
 
-	adminApi := e.Group("/api") //, mw.AdminAuth(cfg)) //TODO ON IF COOKIE
+	adminApi := e.Group("/api", mw.CheckId()) //, mw.AdminAuth(cfg)) //TODO ON IF COOKIE
 	{
 		f := adminApi.Group("/files")
 		{
@@ -154,7 +155,7 @@ func New(rds *redis.Client, a *products.Client, cfg *config.Config) *Echo {
 func (e *Echo) MustRun() {
 	const op = "echo.Run"
 
-	if err := e.e.Start(fmt.Sprintf(":%d", e.cfg.Port)); err != nil && !errors.Is(http.ErrServerClosed, err) {
+	if err := e.e.Start(fmt.Sprintf(":%d", e.cfg.Port)); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		e.e.Logger.Fatal(format.Error(op, err))
 	}
 }

@@ -26,3 +26,7 @@ tasks:
       - update
     cmds:
       - go get github.com/autumnterror/volha-proto@v0.1.6
+  push:
+    aliases:
+      - push
+    cmd: docker push zitrax78/volha-gateway

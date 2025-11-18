@@ -20,7 +20,7 @@ tasks:
       - build
     desc: "Build docker image"
     cmds:
-      - docker build -t zitrax78/volha-gateway .
+      - docker build --platform linux/amd64 -t zitrax78/volha-gateway .
   update:
     aliases:
       - update

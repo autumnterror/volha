@@ -84,6 +84,10 @@ func (a *Apis) SearchProducts(c echo.Context) error {
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "could not search products"})
 	}
 
+	if len(list) == 0 {
+		list = []views.Product{}
+	}
+
 	return c.JSON(http.StatusOK, list)
 }
 

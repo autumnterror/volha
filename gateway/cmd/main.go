@@ -24,7 +24,6 @@ import (
 // @BasePath /
 // @schemes http
 func main() {
-
 	const op = "main"
 
 	cfg := config.MustSetup()

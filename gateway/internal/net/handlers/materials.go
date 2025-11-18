@@ -4,11 +4,12 @@ import (
 	"context"
 	"gateway/internal/utils/format"
 	"gateway/internal/views"
-	"github.com/labstack/echo/v4"
-	"github.com/rs/xid"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/rs/xid"
 )
 
 // CreateMaterial godoc
@@ -46,7 +47,7 @@ func (a *Apis) CreateMaterial(c echo.Context) error {
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "could not create material"})
 	}
 
-	return c.JSON(http.StatusOK, map[string]string{"answer": "material created successfully"})
+	return c.JSON(http.StatusOK, map[string]string{"id": m.Id})
 }
 
 // UpdateMaterial godoc

@@ -4,10 +4,11 @@ import (
 	"context"
 	"gateway/internal/utils/format"
 	"gateway/internal/views"
-	"github.com/rs/xid"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/rs/xid"
 
 	"github.com/labstack/echo/v4"
 )
@@ -76,7 +77,7 @@ func (a *Apis) CreateBrand(c echo.Context) error {
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "failed to create brand"})
 	}
 
-	return c.JSON(http.StatusOK, map[string]string{"answer": "brand created"})
+	return c.JSON(http.StatusOK, map[string]string{"id": brand.Id})
 }
 
 // UpdateBrand godoc

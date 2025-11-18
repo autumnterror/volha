@@ -8,4 +8,3 @@ volha-proto/
 .DS_Store
 local.yaml
 test.go
-.DS_Store

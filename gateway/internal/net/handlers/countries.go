@@ -4,11 +4,12 @@ import (
 	"context"
 	"gateway/internal/utils/format"
 	"gateway/internal/views"
-	"github.com/labstack/echo/v4"
-	"github.com/rs/xid"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/rs/xid"
 )
 
 // CreateCountry godoc
@@ -46,7 +47,7 @@ func (a *Apis) CreateCountry(c echo.Context) error {
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "could not create country"})
 	}
 
-	return c.JSON(http.StatusOK, map[string]string{"answer": "country created successfully"})
+	return c.JSON(http.StatusOK, map[string]string{"id": ctr.Id})
 }
 
 // UpdateCountry godoc

@@ -4,11 +4,12 @@ import (
 	"context"
 	"gateway/internal/utils/format"
 	"gateway/internal/views"
-	"github.com/labstack/echo/v4"
-	"github.com/rs/xid"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/rs/xid"
 )
 
 // CreateCategory godoc
@@ -46,7 +47,7 @@ func (a *Apis) CreateCategory(c echo.Context) error {
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "could not create category"})
 	}
 
-	return c.JSON(http.StatusOK, map[string]string{"answer": "category created successfully"})
+	return c.JSON(http.StatusOK, map[string]string{"id": cat.Id})
 }
 
 // UpdateCategory godoc

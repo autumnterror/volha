@@ -104,11 +104,11 @@ func main() {
 	}
 
 	//dump(user, password, host, db, port)
-	log.Printf("next dump in %s", time.Now().Add(time.Hour).Format("20060102_150405"))
+	log.Printf("next dump in %s", time.Now().Local().Add(time.Hour).Format("20060102_150405"))
 	ticker := time.NewTicker(time.Hour)
 	defer ticker.Stop()
 	for range ticker.C {
 		dump(user, password, host, db, port)
-		log.Printf("next dump in %s", time.Now().Add(time.Hour).Format("20060102_150405"))
+		log.Printf("next dump in %s", time.Now().Local().Add(time.Hour).Format("20060102_150405"))
 	}
 }

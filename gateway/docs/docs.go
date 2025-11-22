@@ -1352,6 +1352,22 @@ const docTemplate = `{
                     "product"
                 ],
                 "summary": "Получить все продукты",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "start \u003e 0",
+                        "name": "start",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "end",
+                        "name": "end",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Успешный запрос",
@@ -2199,8 +2215,8 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	//LeftDelim:        "{{",
-	//RightDelim:       "}}",
+	// LeftDelim:        "{{",
+	// RightDelim:       "}}",
 }
 
 func init() {

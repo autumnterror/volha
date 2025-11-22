@@ -3,7 +3,7 @@ module gateway
 go 1.24.0
 
 require (
-	github.com/autumnterror/volha-proto v0.1.6
+	github.com/autumnterror/volha-proto v0.1.7
 	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.2
 	github.com/labstack/echo/v4 v4.13.4

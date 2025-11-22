@@ -31,7 +31,7 @@ func (c *Client) SearchProducts(ctx context.Context, filter *views.ProductSearch
 }
 
 func (c *Client) GetProduct(ctx context.Context, id string) (*views.Product, error) {
-	const op = "grpc.client.GetAllProducts"
+	const op = "grpc.client.GetProduct"
 
 	resp, err := c.api.GetProduct(ctx, &productsRPC.Id{Id: id})
 	if err != nil {
@@ -105,10 +105,13 @@ func deleteImage(relPath string) error {
 	return nil
 }
 
-func (c *Client) GetAllProducts(ctx context.Context) ([]views.Product, error) {
+func (c *Client) GetAllProducts(ctx context.Context, start, end int) ([]views.Product, error) {
 	const op = "grpc.client.GetAllProducts"
 
-	resp, err := c.api.GetAllProducts(ctx, &emptypb.Empty{})
+	resp, err := c.api.GetAllProducts(ctx, &productsRPC.GetAllProductsPagination{
+		Start: int32(start),
+		End:   int32(end),
+	})
 	if err != nil {
 		return nil, format.Error(op, err)
 	}

@@ -8,6 +8,8 @@ github.com/autumnterror/volha-proto v0.1.5 h1:usuTKXIrYQh1ZpJpjf0u1aHns2eVoVt2jq
 github.com/autumnterror/volha-proto v0.1.5/go.mod h1:KM5xrDm3PMK/iSzlUdS1upYPf79pieT3EZFej4Ezzss=
 github.com/autumnterror/volha-proto v0.1.6 h1:W854kw0VLwdZasoGwGc9msWMJvjynIXJJCfBj0gM5fo=
 github.com/autumnterror/volha-proto v0.1.6/go.mod h1:KM5xrDm3PMK/iSzlUdS1upYPf79pieT3EZFej4Ezzss=
+github.com/autumnterror/volha-proto v0.1.7 h1:DcijZqFxhFueRdzsuri9VpOb3sHortgNoAtt0cLDm7k=
+github.com/autumnterror/volha-proto v0.1.7/go.mod h1:KM5xrDm3PMK/iSzlUdS1upYPf79pieT3EZFej4Ezzss=
 github.com/bsm/ginkgo/v2 v2.12.0 h1:Ny8MWAHyOepLGlLKYmXG4IEkioBysk6GpaRTLC8zwWs=
 github.com/bsm/ginkgo/v2 v2.12.0/go.mod h1:SwYbGRRDovPVboqFv0tPTcG1sN61LM1Z4ARdbAV9g4c=
 github.com/bsm/gomega v1.27.10 h1:yeMWxP2pV2fG3FgAODIY8EiRE3dy0aeFYt4l7wh6yKA=

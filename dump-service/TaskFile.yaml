@@ -1,0 +1,9 @@
+version: 3
+
+tasks:
+  build:
+    aliases:
+      - build
+    desc: "Build docker image"
+    cmds:
+      - docker build -t zitrax78/dumper .

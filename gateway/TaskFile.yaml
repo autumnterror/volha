@@ -20,12 +20,12 @@ tasks:
       - build
     desc: "Build docker image"
     cmds:
-      - docker build --platform linux/amd64 -t zitrax78/volha-gateway .
+      - docker build -t zitrax78/volha-gateway .
   update:
     aliases:
       - update
     cmds:
-      - go get github.com/autumnterror/volha-proto@v0.1.6
+      - go get github.com/autumnterror/volha-proto@v0.1.7
   push:
     aliases:
       - push

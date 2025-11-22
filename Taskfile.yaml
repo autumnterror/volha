@@ -1,0 +1,15 @@
+version: 3
+
+tasks:
+  push:
+    desc: "Push docker images"
+    cmds:
+      - docker push zitrax78/dumper:latest
+      - docker push zitrax78/product-service:latest
+      - docker push zitrax78/volha-gateway:latest
+  build:
+    desc: "Build docker images"
+    cmds:
+      - docker build -t zitrax78/dumper:latest ./dump-service
+      - docker build -t zitrax78/product-service:latest ./product-service
+      - docker build -t zitrax78/volha-gateway:latest ./gateway

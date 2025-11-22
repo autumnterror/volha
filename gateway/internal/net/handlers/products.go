@@ -9,6 +9,7 @@ import (
 	"gateway/internal/views"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/rs/xid"
@@ -217,6 +218,8 @@ func (a *Apis) DeleteProduct(c echo.Context) error {
 // @Description Возвращает список всех продуктов
 // @Tags product
 // @Produce json
+// @Param start query int true  "start > 0"
+// @Param end query int true  "end"
 // @Success 200 {object} views.SWGProductListResponse "Успешный запрос"
 // @Failure 500 {object} views.SWGErrorResponse "Ошибка на сервере"
 // @Failure 502 {object} views.SWGErrorResponse "Ошибка взаимодействия с сервисом"
@@ -224,10 +227,36 @@ func (a *Apis) DeleteProduct(c echo.Context) error {
 func (a *Apis) GetAllProducts(c echo.Context) error {
 	const op = "handlers.GetAllProducts"
 
+	s := c.QueryParam("start")
+	if s == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "bad start"})
+	}
+	en := c.QueryParam("end")
+	if en == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "bad end"})
+	}
+
+	start, err := strconv.Atoi(s)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "start must be int"})
+	}
+	end, err := strconv.Atoi(en)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "end must be int"})
+	}
+
+	if start > end {
+		return c.JSON(http.StatusOK, []views.Product{})
+	}
+
+	if start < 0 {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "start < 0!"})
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	list, err := a.apiProduct.GetAllProducts(ctx)
+	list, err := a.apiProduct.GetAllProducts(ctx, start, end)
 	if err != nil {
 		log.Println(format.Error(op, err))
 		return c.JSON(http.StatusBadGateway, map[string]string{"error": "could not fetch products"})

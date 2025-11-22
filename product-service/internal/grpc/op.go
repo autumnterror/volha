@@ -73,6 +73,46 @@ func handleListResponse[T any](ctx context.Context, op string, fetch func() ([]T
 	}
 }
 
+func (s *ServerAPI) GetAllProducts(ctx context.Context, req *productsRPC.GetAllProductsPagination) (*productsRPC.ProductList, error) {
+	const op = "productsRPC.ServerAPI.GetAllProducts"
+	log.Println(op)
+
+	type result struct {
+		data *productsRPC.ProductList
+		err  error
+	}
+	res := make(chan result, 1)
+
+	if req.GetStart() < 0 {
+		return nil, status.Error(codes.InvalidArgument, "start < 0")
+	}
+
+	go func() {
+		list, err := s.API.GetAllProducts(int(req.GetStart()), int(req.GetEnd()))
+		if err != nil {
+			log.Println(format.Error(op, err))
+			res <- result{
+				data: nil,
+				err:  status.Error(codes.Internal, err.Error()),
+			}
+			return
+		}
+
+		res <- result{
+			data: convert.ToProductList(list).(*productsRPC.ProductList),
+			err:  nil,
+		}
+	}()
+
+	select {
+	case <-ctx.Done():
+		return nil, status.Error(codes.DeadlineExceeded, "Context deadline exceeded")
+	case r := <-res:
+		log.Println(format.String(op, "SUCCESS"))
+		return r.data, r.err
+	}
+}
+
 func (s *ServerAPI) SearchProducts(ctx context.Context, req *productsRPC.ProductSearch) (*productsRPC.ProductList, error) {
 	const op = "productsRPC.ServerAPI.SearchProducts"
 

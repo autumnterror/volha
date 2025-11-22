@@ -34,7 +34,7 @@ type Repository interface {
 	CreateBrand(b *views.Brand) error
 	UpdateBrand(b *views.Brand, id string) error
 	DeleteBrand(id string) error
-	GetAllProducts() ([]views.Product, error)
+	GetAllProducts(start, end int) ([]views.Product, error)
 	GetProductById(id string) (*views.Product, error)
 	CreateProduct(p *views.ProductId) error
 	UpdateProduct(p *views.ProductId, id string) error
@@ -293,14 +293,22 @@ func (d Driver) GetProductById(id string) (*views.Product, error) {
 	return &p, nil
 }
 
-func (d Driver) GetAllProducts() ([]views.Product, error) {
+func (d Driver) GetAllProducts(start, end int) ([]views.Product, error) {
 	const op = "PostgresDb.GetAllProducts"
+
+	if end <= start {
+		return []views.Product{}, nil
+	}
+
+	limit := end - start
 
 	rows, err := d.Driver.Query(`
 		SELECT id, title, article, brand_id, category_id, country_id,
 			   width, height, depth, photos, price, description
 		FROM products
-	`)
+		ORDER BY id
+		LIMIT $1 OFFSET $2
+	`, limit, start)
 	if err != nil {
 		return nil, format.Error(op, err)
 	}
@@ -317,14 +325,28 @@ func (d Driver) GetAllProducts() ([]views.Product, error) {
 
 	for rows.Next() {
 		var rp rawProduct
-		if err := rows.Scan(&rp.product.Id, &rp.product.Title, &rp.product.Article,
-			&rp.brandID, &rp.categoryID, &rp.countryID,
-			&rp.product.Width, &rp.product.Height, &rp.product.Depth,
-			pq.Array(&rp.product.Photos), &rp.product.Price, &rp.product.Description); err != nil {
+		if err := rows.Scan(
+			&rp.product.Id,
+			&rp.product.Title,
+			&rp.product.Article,
+			&rp.brandID,
+			&rp.categoryID,
+			&rp.countryID,
+			&rp.product.Width,
+			&rp.product.Height,
+			&rp.product.Depth,
+			pq.Array(&rp.product.Photos),
+			&rp.product.Price,
+			&rp.product.Description,
+		); err != nil {
 			log.Println(format.Error(op, err))
 			continue
 		}
 		rawList = append(rawList, rp)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, format.Error(op, err)
 	}
 
 	var result []views.Product

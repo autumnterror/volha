@@ -29,7 +29,7 @@ tasks:
     aliases:
       - update
     cmds:
-      - go get github.com/autumnterror/volha-proto@v0.1.6
+      - go get github.com/autumnterror/volha-proto@v0.1.7
   test:
     aliases:
       - test

@@ -36,16 +36,6 @@ func (s *ServerAPI) DeleteProduct(ctx context.Context, req *productsRPC.Id) (*em
 	})
 }
 
-func (s *ServerAPI) GetAllProducts(ctx context.Context, _ *emptypb.Empty) (*productsRPC.ProductList, error) {
-	const op = "productsRPC.ServerAPI.GetAllProducts"
-	log.Println(op)
-	data, err := handleListResponse(ctx, op, s.API.GetAllProducts, convert.ToProductList)
-	if err != nil {
-		return nil, err
-	}
-	return data.(*productsRPC.ProductList), nil
-}
-
 // ---------- Brand ----------
 
 func (s *ServerAPI) CreateBrand(ctx context.Context, req *productsRPC.Brand) (*emptypb.Empty, error) {

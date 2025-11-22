@@ -5,9 +5,49 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"regexp"
+	"sort"
 	"strconv"
 	"time"
 )
+
+const maxDumps = 20
+
+var dumpRegexp = regexp.MustCompile(`^dump\.\d{8}_\d{6}\.sql$`)
+
+func cleanupDumps(dir string) {
+	files, err := os.ReadDir(dir)
+	if err != nil {
+		log.Println("Error reading dumps dir:", err)
+		return
+	}
+	var dumpFiles []string
+	for _, f := range files {
+		if !f.IsDir() && dumpRegexp.MatchString(f.Name()) {
+			dumpFiles = append(dumpFiles, f.Name())
+		}
+	}
+
+	if len(dumpFiles) <= maxDumps {
+		return // нечего чистить
+	}
+
+	sort.Strings(dumpFiles)
+
+	toDelete := len(dumpFiles) - maxDumps
+
+	log.Printf("Too many dumps (%d). Deleting %d oldest...\n", len(dumpFiles), toDelete)
+
+	for i := 0; i < toDelete; i++ {
+		path := filepath.Join(dir, dumpFiles[i])
+		if err := os.Remove(path); err != nil {
+			log.Println("Error deleting", path, ":", err)
+		} else {
+			log.Println("Deleted old dump:", dumpFiles[i])
+		}
+	}
+}
 
 func dump(user, password, host, db string, port int) {
 	ts := time.Now().Format("20060102_150405")
@@ -28,19 +68,18 @@ func dump(user, password, host, db string, port int) {
 		db,
 	)
 
-	// пишем дамп в файл
 	cmd.Stdout = f
 	cmd.Stderr = os.Stderr
-
-	cmd.Env = append(os.Environ(),
-		"PGPASSWORD="+password,
-	)
+	cmd.Env = append(os.Environ(), "PGPASSWORD="+password)
 
 	if err := cmd.Run(); err != nil {
 		log.Println("Error dumping database:", err)
 	} else {
 		log.Println("Dump success:", filename)
 	}
+
+	// очищаем старые дампы
+	cleanupDumps("/dumps")
 }
 
 func main() {
@@ -64,10 +103,12 @@ func main() {
 		log.Fatalln("Cannot create /dumps:", err)
 	}
 
-	ticker := time.NewTicker(time.Minute)
+	//dump(user, password, host, db, port)
+	log.Printf("next dump in %s", time.Now().Add(time.Hour).Format("20060102_150405"))
+	ticker := time.NewTicker(time.Hour)
 	defer ticker.Stop()
-
 	for range ticker.C {
 		dump(user, password, host, db, port)
+		log.Printf("next dump in %s", time.Now().Add(time.Hour).Format("20060102_150405"))
 	}
 }

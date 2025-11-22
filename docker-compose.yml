@@ -1,8 +1,9 @@
 services:
   dumper:
-    container_name: db-dumper
+    container_name: dumper
+    image: zitrax78/dumper:latest
     depends_on:
-      - db
+      - productsdb
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

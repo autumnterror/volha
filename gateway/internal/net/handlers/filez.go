@@ -26,7 +26,6 @@ func newName() string {
 }
 
 const (
-	formFieldName  = "img"
 	ImagesDir      = "./images"
 	MaxUploadBytes = 10 << 20 // 10 MB
 )
@@ -42,7 +41,7 @@ const (
 // @Failure 500 {object} views.SWGErrorResponse "Ошибка на сервере"
 // @Router /api/files/upload [post]
 func (a *Apis) UploadFile(c echo.Context) error {
-	fileHeader, err := c.FormFile(formFieldName)
+	fileHeader, err := c.FormFile("img")
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "file field 'img' is required"})
 	}
